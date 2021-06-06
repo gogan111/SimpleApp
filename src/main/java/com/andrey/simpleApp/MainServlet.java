@@ -11,10 +11,6 @@ import java.io.PrintWriter;
 
 @WebServlet("/")
 public class MainServlet extends HttpServlet {
-    String mainMessage = "Теория — это когда все известно, но ничего не работает. \n" +
-            "Практика — это когда все работает, но никто не знает почему. Мы же объединяем \n" +
-            "теорию и практику: ничего не работает и никто не знает почему!\n";
-
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
