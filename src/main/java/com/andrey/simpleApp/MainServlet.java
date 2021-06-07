@@ -22,7 +22,7 @@ public class MainServlet extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         resp.setContentType("text/html");
         resp.setCharacterEncoding("UTF-8");
 
@@ -30,7 +30,7 @@ public class MainServlet extends HttpServlet {
 
         writer.println("<html>");
         writer.println(
-                "<h1>" +
+                "<h1 align=\"center\">" +
                         "Теория — это когда все известно, но ничего не работает. <br>" +
                         "Практика — это когда все работает, но никто не знает почему. <br>" +
                         "Мы же объединяем теорию и практику: ничего не работает и никто не знает почему!<br>" +
