@@ -15,7 +15,7 @@
 <tr>
 
     <c:if test="${updateUser == null}">
-        <form method="post" action="/SimpleServlet_war/">
+        <form method="post" action="/SimpleServlet-1.0-SNAPSHOT/">
             <td><input type="hidden" name="id" value="-1"/></td>
             <td><input type="text" name="name" placeholder="Please enter name"/></td>
             <td><input type="text" name="surname" placeholder="Please enter surname"/></td>
@@ -26,7 +26,7 @@
         </form>
     </c:if>
     <c:if test="${updateUser != null}">
-        <form method="post" action="/SimpleServlet_war/">
+        <form method="post" action="/SimpleServlet-1.0-SNAPSHOT/">
             <td><input type="text" name="name" value="${updateUser.name}"/></td>
             <td><input type="text" name="surname" value="${updateUser.surname}"/></td>
             <td><input type="number" name="age" value="${updateUser.age}"/></td>
@@ -41,7 +41,7 @@
 <c:forEach var="user" items="${users}">
     <p>
 
-    <form method="post" action="/SimpleServlet_war/">
+    <form method="post" action="/SimpleServlet-1.0-SNAPSHOT/">
         <td><c:out value="${user.id}"/></td>
         <td><c:out value="${user.name}"/></td>
         <td><c:out value="${user.surname}"/></td>
