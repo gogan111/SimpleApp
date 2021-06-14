@@ -30,7 +30,9 @@ public class MainServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         List<User> userList = userService.getUsers();
+
         req.setAttribute("users", userList);
+
         req.getRequestDispatcher("main.jsp").forward(req, resp);
     }
 
@@ -59,10 +61,11 @@ public class MainServlet extends HttpServlet {
 
     private void addUserAction(HttpServletRequest req) {
         User user = null;
+
         int id = Integer.parseInt(req.getParameter("id"));
+        int age = Integer.parseInt(req.getParameter("age"));
         String name = req.getParameter("name");
         String surname = req.getParameter("surname");
-        int age = Integer.parseInt(req.getParameter("age"));
 
         if (id < 0) {
             user = new User(name, surname, age);
@@ -74,16 +77,16 @@ public class MainServlet extends HttpServlet {
     }
 
     private void updateUserAction(HttpServletRequest req) {
-
         int id = Integer.parseInt(req.getParameter("userId"));
 
         User updateUser = userService.getUser(id);
+
         req.setAttribute("updateUser", updateUser);
     }
 
     private void deleteUserAction(HttpServletRequest req) {
-
         int userId = Integer.parseInt(req.getParameter("userId"));
+
         userService.deleteUser(userId);
     }
 }

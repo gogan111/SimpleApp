@@ -13,7 +13,6 @@
 <h1>Definitely not important list</h1>
 
 <tr>
-
     <c:if test="${updateUser == null}">
         <form method="post" action="/SimpleServlet-1.0-SNAPSHOT/">
             <td><input type="hidden" name="id" value="-1"/></td>
@@ -35,7 +34,6 @@
             </td>
         </form>
     </c:if>
-
 </tr>
 
 <c:forEach var="user" items="${users}">
