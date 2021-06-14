@@ -11,5 +11,7 @@ public interface UserService {
 
     List<User> getUsers();
 
+    User getUser(int id);
+
     boolean deleteUser(int userId);
 }

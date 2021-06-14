@@ -1,8 +1,8 @@
 package com.andrey.simpleApp.servlet;
 
-import com.andrey.simpleApp.dao.UserDao;
-import com.andrey.simpleApp.dao.UserDaoImpl;
 import com.andrey.simpleApp.domain.User;
+import com.andrey.simpleApp.service.UserService;
+import com.andrey.simpleApp.service.UserServiceImpl;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -15,7 +15,7 @@ import java.util.List;
 
 @WebServlet("/")
 public class MainServlet extends HttpServlet {
-    UserDao userDao = new UserDaoImpl();
+    UserService userService = new UserServiceImpl();
 
     @Override
     public void init(ServletConfig config) throws ServletException {
@@ -29,11 +29,27 @@ public class MainServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-        resp.setContentType("text/html");
-        List<User> userList = userDao.getUsers();
-        req.setAttribute("list", userList);
-
+        List<User> userList = userService.getUsers();
+        req.setAttribute("users", userList);
         req.getRequestDispatcher("main.jsp").forward(req, resp);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String action = req.getParameter("action");
+
+        switch (action) {
+            case "add":
+                addUserAction(req);
+                break;
+            case "delete":
+                deleteUserAction(req);
+                break;
+            case "update":
+                updateUserAction(req);
+                break;
+        }
+        doGet(req, resp);
     }
 
     @Override
@@ -41,4 +57,33 @@ public class MainServlet extends HttpServlet {
         super.destroy();
     }
 
+    private void addUserAction(HttpServletRequest req) {
+        User user = null;
+        int id = Integer.parseInt(req.getParameter("id"));
+        String name = req.getParameter("name");
+        String surname = req.getParameter("surname");
+        int age = Integer.parseInt(req.getParameter("age"));
+
+        if (id < 0) {
+            user = new User(name, surname, age);
+            userService.saveUser(user);
+        } else {
+            user = new User(id, name, surname, age);
+            userService.updateUser(user);
+        }
+    }
+
+    private void updateUserAction(HttpServletRequest req) {
+
+        int id = Integer.parseInt(req.getParameter("userId"));
+
+        User updateUser = userService.getUser(id);
+        req.setAttribute("updateUser", updateUser);
+    }
+
+    private void deleteUserAction(HttpServletRequest req) {
+
+        int userId = Integer.parseInt(req.getParameter("userId"));
+        userService.deleteUser(userId);
+    }
 }

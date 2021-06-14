@@ -25,11 +25,9 @@ public class UserDaoImpl implements UserDao {
             preparedStatement.setInt(3, user.getAge());
 
             preparedStatement.execute();
-
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-
 
         return false;
     }
@@ -37,20 +35,16 @@ public class UserDaoImpl implements UserDao {
     @Override
     public boolean updateUser(User user) {
         try (Connection connection = databaseConfig.getConnection()) {
-            String sql = "INSERT INTO usr (id, name, surname, age) Values (?, ?, ?, ?)";
+            String sql = "UPDATE usr set (name, surname, age) = (?, ?, ?) WHERE id=?";
 
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
-            preparedStatement.setInt(1, user.getId());
-            preparedStatement.setString(2, user.getName());
-            preparedStatement.setString(3, user.getSurname());
-            preparedStatement.setInt(4, user.getAge());
+            preparedStatement.setString(1, user.getName());
+            preparedStatement.setString(2, user.getSurname());
+            preparedStatement.setInt(3, user.getAge());
+            preparedStatement.setInt(4, user.getId());
 
-            int rows = preparedStatement.executeUpdate();
-
-            System.out.printf("%d rows added", rows);
-
-
+            preparedStatement.executeUpdate();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -61,7 +55,8 @@ public class UserDaoImpl implements UserDao {
     public List<User> getUsers() {
         List<User> users = new ArrayList<>();
         try (Connection connection = databaseConfig.getConnection()) {
-            String sql = "SELECT * FROM usr";
+
+            String sql = "SELECT * FROM usr ORDER BY id";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
             ResultSet set = preparedStatement.executeQuery();
@@ -70,19 +65,18 @@ public class UserDaoImpl implements UserDao {
                 String name = set.getString(2);
                 String surname = set.getString(3);
                 int age = set.getInt(4);
+
                 User user = new User(id, name, surname, age);
-                System.out.println(user.toString());
+
+                users.add(user);
             }
             return users;
-
-
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
 
-
-        return null;
+        return users;
     }
 
     @Override
@@ -100,5 +94,30 @@ public class UserDaoImpl implements UserDao {
         }
 
         return false;
+    }
+
+    @Override
+    public User getUser(int userId) {
+
+        try (Connection connection = databaseConfig.getConnection()) {
+            String sql = "SELECT * FROM usr WHERE id = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, userId);
+
+            ResultSet set = preparedStatement.executeQuery();
+            while(set.next()) {
+                int id = set.getInt(1);
+                String name = set.getString(2);
+                String surname = set.getString(3);
+                int age = set.getInt(4);
+                User user = new User(id, name, surname, age);
+                return user;
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return null;
     }
 }
