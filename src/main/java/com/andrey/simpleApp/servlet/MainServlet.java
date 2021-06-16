@@ -1,6 +1,7 @@
 package com.andrey.simpleApp.servlet;
 
 import com.andrey.simpleApp.domain.User;
+import com.andrey.simpleApp.domain.validator.UserValidator;
 import com.andrey.simpleApp.service.UserService;
 import com.andrey.simpleApp.service.UserServiceImpl;
 
@@ -61,19 +62,33 @@ public class MainServlet extends HttpServlet {
 
     private void addUserAction(HttpServletRequest req) {
         User user = null;
+        UserValidator userValidator = null;
 
         int id = Integer.parseInt(req.getParameter("id"));
-        int age = Integer.parseInt(req.getParameter("age"));
-        String name = req.getParameter("name");
-        String surname = req.getParameter("surname");
-        String email = req.getParameter("email");
+        int age = 0;
+        if (!req.getParameter("age").isEmpty()) {
+            age = Integer.parseInt(req.getParameter("age"));
+        }
+        String name = req.getParameter("name").trim();
+        String surname = req.getParameter("surname").trim();
+        String email = req.getParameter("email").trim();
+
+        user = new User(id, name, surname, age, email);
+        userValidator = new UserValidator(user);
+
+
+
+
+        if (userValidator.hasErrors()) {
+            req.setAttribute("updateUser", user);
+            req.setAttribute("validator", userValidator);
+
+            return;
+        }
 
         if (id < 0) {
-            user = new User(name, surname, age, email);
-            System.out.println(user.toString());
             userService.saveUser(user);
         } else {
-            user = new User(id, name, surname, age, email);
             userService.updateUser(user);
         }
     }
