@@ -19,6 +19,7 @@
             <td><input type="text" name="name" placeholder="Please enter name"/></td>
             <td><input type="text" name="surname" placeholder="Please enter surname"/></td>
             <td><input type="number" name="age" placeholder="Please enter your age"/></td>
+            <td><input type="email" name="email" placeholder="example@mail.com"/></td>
             <td><input type="hidden" name="id" value="-1"/>
                 <button type="submit" name="action" value="add">add</button>
             </td>
@@ -29,6 +30,7 @@
             <td><input type="text" name="name" value="${updateUser.name}"/></td>
             <td><input type="text" name="surname" value="${updateUser.surname}"/></td>
             <td><input type="number" name="age" value="${updateUser.age}"/></td>
+            <td><input type="text" name="email" value="${updateUser.email}"/></td>
             <td><input type="hidden" name="id" value="${updateUser.id}"/>
                 <button type="submit" name="action" value="add">update</button>
             </td>
@@ -44,6 +46,7 @@
         <td><c:out value="${user.name}"/></td>
         <td><c:out value="${user.surname}"/></td>
         <td><c:out value="${user.age}"/></td>
+        <td><c:out value="${user.email}"/></td>
         <td><input type="hidden" name="userId" value="${user.id}"/>
             <button type="submit" name="action" value="update">edit</button>
             <button type="submit" name="action" value="delete">X</button>

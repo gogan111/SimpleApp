@@ -66,12 +66,14 @@ public class MainServlet extends HttpServlet {
         int age = Integer.parseInt(req.getParameter("age"));
         String name = req.getParameter("name");
         String surname = req.getParameter("surname");
+        String email = req.getParameter("email");
 
         if (id < 0) {
-            user = new User(name, surname, age);
+            user = new User(name, surname, age, email);
+            System.out.println(user.toString());
             userService.saveUser(user);
         } else {
-            user = new User(id, name, surname, age);
+            user = new User(id, name, surname, age, email);
             userService.updateUser(user);
         }
     }

@@ -6,18 +6,21 @@ public class User {
     private int age;
     private String name;
     private String surname;
+    private String email;
 
-    public User(String name, String surname, int age) {
+    public User(String name, String surname, int age, String email) {
         this.age = age;
         this.name = name;
         this.surname = surname;
+        this.email = email;
     }
 
-    public User(int id, String name, String surname, int age) {
+    public User(int id, String name, String surname, int age, String email) {
         this.id = id;
         this.age = age;
         this.name = name;
         this.surname = surname;
+        this.email = email;
     }
 
     public int getId() {
@@ -52,6 +55,14 @@ public class User {
         this.surname = surname;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -59,6 +70,7 @@ public class User {
                 ", age=" + age +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
+                ", email='" + email + '\'' +
                 '}';
     }
 

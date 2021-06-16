@@ -15,7 +15,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public boolean saveUser(User user) {
-        String INSERT = "INSERT INTO usr (name, surname, age) Values (?, ?, ?)";
+        String INSERT = "INSERT INTO usr (name, surname, age, email) Values (?, ?, ?, ?)";
 
         try (
                 Connection connection = databaseConfig.getConnection();
@@ -24,6 +24,7 @@ public class UserDaoImpl implements UserDao {
             preparedStatement.setString(1, user.getName());
             preparedStatement.setString(2, user.getSurname());
             preparedStatement.setInt(3, user.getAge());
+            preparedStatement.setString(4, user.getEmail());
 
             preparedStatement.execute();
         } catch (SQLException e) {
@@ -34,7 +35,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public boolean updateUser(User user) {
-        String UPDATE = "UPDATE usr set (name, surname, age) = (?, ?, ?) WHERE id=?";
+        String UPDATE = "UPDATE usr set (name, surname, age, email) = (?, ?, ?, ?) WHERE id=?";
 
         try (
                 Connection connection = databaseConfig.getConnection();
@@ -43,7 +44,8 @@ public class UserDaoImpl implements UserDao {
             preparedStatement.setString(1, user.getName());
             preparedStatement.setString(2, user.getSurname());
             preparedStatement.setInt(3, user.getAge());
-            preparedStatement.setInt(4, user.getId());
+            preparedStatement.setString(4, user.getEmail());
+            preparedStatement.setInt(5, user.getId());
 
             preparedStatement.execute();
         } catch (SQLException e) {
@@ -67,8 +69,9 @@ public class UserDaoImpl implements UserDao {
                 String name = set.getString(2);
                 String surname = set.getString(3);
                 int age = set.getInt(4);
+                String email = set.getString(5);
 
-                User user = new User(id, name, surname, age);
+                User user = new User(id, name, surname, age, email);
 
                 users.add(user);
             }
@@ -94,8 +97,10 @@ public class UserDaoImpl implements UserDao {
                     String name = set.getString(2);
                     String surname = set.getString(3);
                     int age = set.getInt(4);
+                    String email = set.getString(5);
 
-                    return new User(id, name, surname, age);
+
+                    return new User(id, name, surname, age, email);
                 }
             }
         } catch (SQLException e) {
