@@ -76,9 +76,6 @@ public class MainServlet extends HttpServlet {
         user = new User(id, name, surname, age, email);
         userValidator = new UserValidator(user);
 
-
-
-
         if (userValidator.hasErrors()) {
             req.setAttribute("updateUser", user);
             req.setAttribute("validator", userValidator);

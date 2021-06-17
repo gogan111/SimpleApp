@@ -31,8 +31,6 @@
                     </c:if>
                 </error>
             </div>
-
-
             <div> Age:
                 <input type="number" name="age" value="${updateUser.age}"/>
                 <error><c:if test="${validator != null}">${validator.ageError}</c:if></error>
@@ -49,6 +47,7 @@
             </div>
         </form>
     </c:if>
+
     <c:if test="${updateUser == null}">
         <form method="post" action="/SimpleServlet-1.0-SNAPSHOT/">
             <input type="hidden" name="id" value="-1"/>
@@ -90,6 +89,7 @@
 </c:forEach>
 
 </body>
+
 <style>
     error {
         color: red;
