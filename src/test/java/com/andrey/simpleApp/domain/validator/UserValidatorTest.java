@@ -18,7 +18,7 @@ public class UserValidatorTest {
 
     @Test
     public void checkCorrectName() {
-        String[] names = {"John", "Айфон", "Asdjfhasd", "asdjfgvs-asd"};
+        String[] names = {"John", "Айфон", "Asdjfhasd", "asdjfgvsd"};
         for (String name : names) {
             Assert.assertFalse(validator.checkName(name));
         }
@@ -34,7 +34,7 @@ public class UserValidatorTest {
 
     @Test
     public void checkCorrectSurname() {
-        String[] surnames = {"Dou", "Wayn", "Фамилия", "asdasds-asd"};
+        String[] surnames = {"Dou", "Wayn", "Фамилия", "asdasdsd"};
         for (String surname : surnames) {
             Assert.assertFalse(validator.checkName(surname));
         }
