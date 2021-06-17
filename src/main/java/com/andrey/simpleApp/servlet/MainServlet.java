@@ -39,6 +39,7 @@ public class MainServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
         String action = req.getParameter("action");
 
         switch (action) {
@@ -69,10 +70,10 @@ public class MainServlet extends HttpServlet {
         if (!req.getParameter("age").isEmpty()) {
             age = Integer.parseInt(req.getParameter("age"));
         }
-        String name = req.getParameter("name").trim();
-        String surname = req.getParameter("surname").trim();
+        String name = req.getParameter("name");
+        String surname = req.getParameter("surname");
         String email = req.getParameter("email").trim();
-
+        System.out.println("   -   " + name + " - " + surname);
         user = new User(id, name, surname, age, email);
         userValidator = new UserValidator(user);
 

@@ -40,7 +40,7 @@ public class UserValidator implements Validator {
     @Override
     public boolean checkName(String name) {
         boolean error = false;
-        String reg = "^(([A-Za-z]{1}[0-9A-Za-z]{0,30})|([А-Яа-я]{1}[0-9А-Яа-я]{0,30}))";
+        String reg = "^([A-Za-z]{1}[0-9A-Za-z]{0,30})";
 
         if (name.length() < 2) {
             nameError = "Your name is too short";
@@ -56,7 +56,7 @@ public class UserValidator implements Validator {
     @Override
     public boolean checkSurname(String surname) {
         boolean error = false;
-        String reg = "^(([A-Za-z]{1}[0-9A-Za-z]{0,30})|([А-Яа-я]{1}[0-9А-Яа-я]{0,30}))";
+        String reg = "^([A-Za-z]{1}[0-9A-Za-z]{0,30})";
 
         if (surname.length() < 2) {
             surnameError = "Your surname is too short";

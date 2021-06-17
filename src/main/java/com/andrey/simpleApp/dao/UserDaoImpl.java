@@ -10,15 +10,15 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class UserDaoImpl implements UserDao {
-    private DatabaseConfig databaseConfig = new DatabaseConfig();
 
     @Override
     public boolean saveUser(User user) {
         String INSERT = "INSERT INTO usr (name, surname, age, email) Values (?, ?, ?, ?)";
 
         try (
-                Connection connection = databaseConfig.getConnection();
+                Connection connection = DatabaseConfig.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(INSERT)
         ) {
             preparedStatement.setString(1, user.getName());
@@ -38,7 +38,7 @@ public class UserDaoImpl implements UserDao {
         String UPDATE = "UPDATE usr set (name, surname, age, email) = (?, ?, ?, ?) WHERE id=?";
 
         try (
-                Connection connection = databaseConfig.getConnection();
+                Connection connection = DatabaseConfig.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(UPDATE)
         ) {
             preparedStatement.setString(1, user.getName());
@@ -60,7 +60,7 @@ public class UserDaoImpl implements UserDao {
         String SELECT_ALL = "SELECT * FROM usr ORDER BY id";
 
         try (
-                Connection connection = databaseConfig.getConnection();
+                Connection connection = DatabaseConfig.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL);
                 ResultSet set = preparedStatement.executeQuery();
         ) {
@@ -87,7 +87,7 @@ public class UserDaoImpl implements UserDao {
         String SELECT_BY_ID = "SELECT * FROM usr WHERE id = ?";
 
         try (
-                Connection connection = databaseConfig.getConnection();
+                Connection connection = DatabaseConfig.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(SELECT_BY_ID);
         ) {
             preparedStatement.setInt(1, userId);
@@ -114,7 +114,7 @@ public class UserDaoImpl implements UserDao {
         String DELETE = "DELETE FROM usr WHERE id = ?";
 
         try (
-                Connection connection = databaseConfig.getConnection();
+                Connection connection = DatabaseConfig.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(DELETE);
         ) {
             preparedStatement.setInt(1, userId);

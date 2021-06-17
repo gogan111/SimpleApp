@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
+    <meta charset="ISO-8859-1">
     <title>User list</title>
 
 </head>
@@ -80,12 +80,14 @@
         <input type="hidden" name="userId" value="${user.id}"/>
         <button type="submit" name="action" value="update">edit</button>
         <button type="submit" name="action" value="delete">X</button>
+
     </form>
     </p>
 
 </c:forEach>
 
 </body>
+
 <style>
     error {
         color: red;
