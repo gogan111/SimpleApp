@@ -35,12 +35,10 @@
                 <input type="number" name="age" value="${updateUser.age}"/>
                 <error><c:if test="${validator != null}">${validator.ageError}</c:if></error>
             </div>
-
             <div> Email:
                 <input type="text" name="email" value="${updateUser.email}"/>
                 <error><c:if test="${validator != null}">${validator.emailError}</c:if></error>
             </div>
-
             <input type="hidden" name="id" value="${updateUser.id}"/>
             <div>
                 <button type="submit" name="action" value="add">update</button>
@@ -82,14 +80,12 @@
         <input type="hidden" name="userId" value="${user.id}"/>
         <button type="submit" name="action" value="update">edit</button>
         <button type="submit" name="action" value="delete">X</button>
-
     </form>
     </p>
 
 </c:forEach>
 
 </body>
-
 <style>
     error {
         color: red;
